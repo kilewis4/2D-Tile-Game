@@ -22,5 +22,6 @@ public class GameState extends State
     public void render(Graphics g) 
     {
         player.render(g);
+        Tile.tiles[2].render(g, 0, 0);
     }
 }
