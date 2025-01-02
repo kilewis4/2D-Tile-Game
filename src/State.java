@@ -17,11 +17,11 @@ public abstract class State
     }
 
     //CLASS
-    protected Game game;
+    protected Handler handler;
 
-    public State(Game game)
+    public State(Handler handler)
     {
-        this.game = game;
+        this.handler = handler;
     }
 
     public abstract void tick();
