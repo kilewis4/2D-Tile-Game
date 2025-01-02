@@ -4,11 +4,13 @@ import java.awt.Graphics;
 
 public abstract class Entity 
 {
+    protected Game game;
     protected float x, y;
     protected int height, width;
     
-    public Entity(float x, float y, int width, int height)
+    public Entity(Game game, float x, float y, int width, int height)
     {
+        this.game = game;
         this.x = x;
         this.y = y;
         this.width = width;

@@ -11,14 +11,14 @@ public class GameState extends State
     {
         super(game);
         player = new Player(game, 100, 100);
-        world = new World("res/worlds/world1.txt");
+        world = new World(game,    "res/worlds/world1.txt");
     }
 
     @Override
     public void tick() 
     {
         world.tick();
-        player.tick(); 
+        player.tick();
     }
 
     @Override

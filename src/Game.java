@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 public class Game implements Runnable
 {
     private Display display;
-    public int width, height;
+    private int width, height;
     public String title;
 
     private boolean running = false;
@@ -24,6 +24,9 @@ public class Game implements Runnable
     //Input
     private KeyManager keyManager;
 
+    //Camera
+    private GameCamera gameCamera;
+
     public Game(String title, int width, int height)
     {
         this.width = width;
@@ -37,6 +40,8 @@ public class Game implements Runnable
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyManager);
         Assets.init();
+
+        gameCamera = new GameCamera(this, 0, 0);
 
         gameState = new GameState(this);
         menuState = new MenuState(this);
@@ -116,6 +121,21 @@ public class Game implements Runnable
     public KeyManager getKeyManager()
     {
         return keyManager;
+    }
+
+    public GameCamera getGameCamera()
+    {
+        return gameCamera;
+    }
+
+    public int getWidth()
+    {
+        return width;
+    }
+
+    public int getHeight()
+    {
+        return height;
     }
 
     public synchronized void start()
