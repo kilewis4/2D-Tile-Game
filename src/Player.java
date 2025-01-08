@@ -9,10 +9,10 @@ public class Player extends Creature
     {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
 
-        bounds.x = 1;
-        bounds.y = 1;
-        bounds.width = 62;
-        bounds.height = 62;
+        bounds.x = 2;
+        bounds.y = 2;
+        bounds.width = 60;
+        bounds.height = 60;
     }     
 
     public void tick()
@@ -51,10 +51,5 @@ public class Player extends Creature
     public void render(Graphics g)
     {
         g.drawImage(Assets.player, (int) (x - handler.getGameCamera().getXOffset()), (int) (y - handler.getGameCamera().getYOffset()), width, height, null);
-
-        g.setColor(Color.black);
-        g.fillRect((int) (x + bounds.x - handler.getGameCamera().getXOffset()),
-                    (int) (y + bounds.y - handler.getGameCamera().getYOffset()),
-                    bounds.width, bounds.height);
     }
 } 
