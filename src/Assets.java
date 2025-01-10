@@ -13,7 +13,7 @@ public class Assets
 
     public static void init()
     {
-        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("../res/texture/sheet_ep25.png"));
+        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("../res/texture/sheet_ep27.png"));
 
         player_down = new BufferedImage[2];
 
@@ -39,6 +39,6 @@ public class Assets
         dirt = sheet.crop(width, 0, width, height);
         grass = sheet.crop(width * 2, 0, width, height);
         stone = sheet.crop(width * 3, 0, width, height);
-        tree = sheet.crop(0, height, width, height);
+        tree = sheet.crop(0, 0, width, height * 2);
     }    
 }
