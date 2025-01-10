@@ -8,16 +8,24 @@ public class World
     private int width, height;
     private int spawnX, spawnY;
     private int[][] tiles;
+    //Entities
+    private EntityManager entityManager;
     
     public World(Handler handler, String path)
     {
         this.handler = handler;
+        entityManager = new EntityManager(handler, new Player(handler, 100, 100));
+        entityManager.addEntity(new Tree(handler, 100, 250));
+        entityManager.addEntity(new Tree(handler, 100, 350));
+        entityManager.addEntity(new Tree(handler, 100, 450));
         loadworld(path);
+        entityManager.getPlayer().setX(spawnX);
+        entityManager.getPlayer().setY(spawnY);
     }
 
     public void tick()
     {
-
+        entityManager.tick();
     }
 
     public void render(Graphics g)
@@ -35,6 +43,8 @@ public class World
                                     (int) (y * Tile.TILEHEIGHT - handler.getGameCamera().getYOffset()));
             }
         }
+        //Entities
+        entityManager.render(g);
     }
 
     public Tile getTile(int x, int y)
