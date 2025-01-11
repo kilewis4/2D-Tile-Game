@@ -10,10 +10,16 @@ public class Assets
     public static BufferedImage[] player_up;
     public static BufferedImage[] player_left;
     public static BufferedImage[] player_right;
+    public static BufferedImage[] zombie_down, zombie_up, zombie_left, zombie_right;
+    public static BufferedImage[] btn_start;
 
     public static void init()
     {
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("../res/texture/sheet_ep27.png"));
+
+        btn_start = new BufferedImage[2];
+		btn_start[0] = sheet.crop(width * 6, height * 4, width * 2, height);
+		btn_start[1] = sheet.crop(width * 6, height * 5, width * 2, height);
 
         player_down = new BufferedImage[2];
 

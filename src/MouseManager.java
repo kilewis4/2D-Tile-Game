@@ -8,10 +8,16 @@ public class MouseManager implements MouseListener, MouseMotionListener
 {
     private boolean leftPressed, rightPressed;
     private int mouseX, mouseY;
+    private UIManager uiManager;
 
     public MouseManager()
     {
 
+    }
+
+    public void setUIManager(UIManager uiManager)
+    {
+        this.uiManager = uiManager;
     }
 
     //Getters
@@ -62,6 +68,11 @@ public class MouseManager implements MouseListener, MouseMotionListener
         {
             rightPressed = false;
         }
+
+        if(uiManager != null)
+        {
+            uiManager.onMouseRelease(e);
+        }
     }
 
     @Override
@@ -69,6 +80,11 @@ public class MouseManager implements MouseListener, MouseMotionListener
     {
         mouseX = e.getX();
         mouseY = e.getY();
+
+        if(uiManager != null)
+        {
+            uiManager.onMouseMove(e);
+        }
     }
 
     @Override
