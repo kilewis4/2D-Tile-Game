@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 public class Assets
 {
     private static final int width = 32, height = 32;
-    public static BufferedImage dirt, grass, stone, tree, rock;
+    public static BufferedImage dirt, grass, stone, tree, rock, wood;
     public static BufferedImage[] player_down;
     public static BufferedImage[] player_up;
     public static BufferedImage[] player_left;
@@ -15,7 +15,9 @@ public class Assets
 
     public static void init()
     {
-        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("../res/texture/sheet_ep27.png"));
+        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("../res/texture/sheet_ep32.png"));
+
+        wood = sheet.crop(width, height, width, height);
 
         btn_start = new BufferedImage[2];
 		btn_start[0] = sheet.crop(width * 6, height * 4, width * 2, height);

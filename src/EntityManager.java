@@ -2,6 +2,7 @@ package src;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.awt.Graphics;
 
 public class EntityManager 
@@ -32,13 +33,14 @@ public class EntityManager
     
     public void tick()
     {
-        for(int i = 0; i < entities.size(); i++)
+        Iterator<Entity> it = entities.iterator();
+        while(it.hasNext())
         {
-            Entity e = entities.get(i);
+            Entity e = it.next();
             e.tick();
             if(!e.isActive())
             {
-                entities.remove(e);
+                it.remove();
             }
         }
         entities.sort(renderSorter);

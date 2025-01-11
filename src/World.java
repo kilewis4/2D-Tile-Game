@@ -10,11 +10,14 @@ public class World
     private int[][] tiles;
     //Entities
     private EntityManager entityManager;
-    
+    //Item
+    private ItemManager itemManager;
+
     public World(Handler handler, String path)
     {
         this.handler = handler;
         entityManager = new EntityManager(handler, new Player(handler, 100, 100));
+        itemManager = new ItemManager(handler);
         entityManager.addEntity(new Tree(handler, 100, 250));
         entityManager.addEntity(new Rock(handler, 100, 450));
         loadworld(path);
@@ -24,6 +27,7 @@ public class World
 
     public void tick()
     {
+        itemManager.tick();
         entityManager.tick();
     }
 
@@ -42,6 +46,8 @@ public class World
                                     (int) (y * Tile.TILEHEIGHT - handler.getGameCamera().getYOffset()));
             }
         }
+        //Item
+        itemManager.render(g);
         //Entities
         entityManager.render(g);
     }
@@ -82,6 +88,8 @@ public class World
         }
     }
 
+    //Getters and setters
+
     public int getWidth()
     {
         return width;
@@ -95,5 +103,25 @@ public class World
     public EntityManager getEntityManager()
     {
         return entityManager;
+    }
+
+    public ItemManager getItemManager() 
+    {
+        return itemManager;
+    }
+
+    public void setItemManager(ItemManager itemManager) 
+    {
+        this.itemManager = itemManager;
+    }
+
+    public Handler getHandler() 
+    {
+        return handler;
+    }
+
+    public void setHandler(Handler handler) 
+    {
+        this.handler = handler;
     }
 }

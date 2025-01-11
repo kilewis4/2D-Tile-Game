@@ -24,7 +24,7 @@ public class Rock extends StaticEntity
 	
 	public void die()
     {
-		
+		handler.getWorld().getItemManager().addItem(Item.rockItem.createNew((int) x, (int) y));
 	}
 
 	@Override
