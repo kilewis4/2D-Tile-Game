@@ -13,6 +13,8 @@ public class Player extends Creature
     private Animation animRight;
     //Attack timer
     private long lastAttackTimer, attackCooldown = 800, attackTimer = attackCooldown;
+    //Inventory
+    private Inventory inventory;
 
     public Player(Handler handler, float x, float y)
     {
@@ -28,6 +30,8 @@ public class Player extends Creature
         animUp = new Animation(500, Assets.player_up);
         animLeft = new Animation(500, Assets.player_left);
         animRight = new Animation(500, Assets.player_right);
+
+        inventory = new Inventory(handler);
     }     
 
     public void tick()
@@ -43,6 +47,8 @@ public class Player extends Creature
         handler.getGameCamera().centerOnEntity(this);
         //Attack
         checkAttacks();
+        //Inventory
+        inventory.tick();
     }
 
     private void checkAttacks()
@@ -135,6 +141,7 @@ public class Player extends Creature
     public void render(Graphics g)
     {
         g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamera().getXOffset()), (int) (y - handler.getGameCamera().getYOffset()), width, height, null);
+        inventory.render(g);
 
         //g.setColor(Color.red);
 		//g.fillRect((int) (x + bounds.x - handler.getGameCamera().getXOffset()),
@@ -160,5 +167,10 @@ public class Player extends Creature
         {
             return animDown.getCurrentFrame();
         }
+    }
+
+    public Inventory getInventory()
+    {
+        return inventory;
     }
 } 

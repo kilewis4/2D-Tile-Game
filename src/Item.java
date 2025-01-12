@@ -1,6 +1,7 @@
 package src;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 public class Item 
@@ -10,7 +11,7 @@ public class Item
 
     public static Item[] items = new Item[256];
     public static Item woodItem = new Item(Assets.wood, "Wood", 0);
-    public static Item rockItem = new Item(Assets.rock, "Rock", 0);
+    public static Item rockItem = new Item(Assets.rock, "Rock", 1);
 
     //Class
     public static final int ITEMWIDTH = 32, ITEMHEIGHT = 32, PICKED_UP = -1;
@@ -20,7 +21,10 @@ public class Item
     protected String name;
     protected final int id;
 
+    protected Rectangle bounds;
+
     protected int x, y, count;
+    protected boolean pickedUp = false;
 
     public Item(BufferedImage texture, String name, int id)
     {
@@ -29,10 +33,19 @@ public class Item
         this.id = id;
         count = 1;
 
+        bounds = new Rectangle(x, y, ITEMWIDTH, ITEMHEIGHT);
+
         items[id] = this;
     }
 
-    public void tick(){}
+    public void tick()
+    {
+        if(handler.getWorld().getEntityManager().getPlayer().getCollisionBounds(0f, 0f).intersects(bounds))
+        {
+            pickedUp = true;
+            handler.getWorld().getEntityManager().getPlayer().getInventory().addItem(this);
+        }        
+    }
 
     public void render(Graphics g)
     {
@@ -60,6 +73,8 @@ public class Item
     {
         this.x = x;
         this.y = y;
+        bounds.x = x;
+        bounds.y = y;
     }
 
     //Getters and Setters
@@ -122,5 +137,15 @@ public class Item
     public void setCount(int count) 
     {
         this.count = count;
+    }
+
+    public boolean getPickedUp()
+    {
+        return pickedUp;
+    }
+
+    public int getId()
+    {
+        return id;
     }
 }
